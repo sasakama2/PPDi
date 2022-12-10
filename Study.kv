@@ -1,0 +1,796 @@
+#: set text_color (0.8, 0.8, 0.8, 1)
+#: set background_color_down (0.3, 0.3, 0.3, 1)
+#: set frame_line_color (0, 0, 0, 1)
+#: set frame_line_width 1
+#: set space '1dp'
+
+#:import label kivy.uix.label.Label
+#:import widget kivy.uix.widget.Widget
+#:import checkbox kivy.uix.checkbox.CheckBox
+<diagnosis>
+    lbl:label1
+    btn:button1
+    btn2:button2
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.1, 0.1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        height: root.height
+        width: root.width
+        spacing: '4dp'
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 1
+    
+                BackgroundImage:
+                    background_color:0.1,0.1,0.1,1
+                    size_hint_y: 0.4
+                    source:'pic\\PPDi.png'
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: 0.8
+        
+
+                    BoxLayout:
+                        size_hint_y:1
+                        orientation: 'vertical'
+            
+                        BoxLayout:
+                            size_hint_y:1
+                            orientation: 'vertical'
+                
+
+                            BoxLayout:
+                                size_hint_y:1
+                                orientation: 'horizontal'
+                    
+                                Label:
+                                    color:text_color
+
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y:0.5
+                            spacing: '4dp'
+                
+                            BoxLayout:
+                                spacing: '4dp'
+
+                                WihteButton:
+                                    
+                                    color:text_color
+                                    text:'使い方'
+                                    on_press:root.open_instruction()
+                                    canvas:
+                                        Color:
+                                            rgba:frame_line_color
+                                        Line:
+                                            rectangle: [*self.pos, *self.size,]
+                                            width:frame_line_width
+
+                            BoxLayout:
+                                spacing: '4dp'
+                    
+                                orientation: 'vertical'
+
+                                WihteButton:
+                                    active:True
+                                    on_press:root.setting_open()
+                                    text:'修正オプション'
+                                    color:text_color
+                                    canvas.before:
+                                        Color:
+                                            rgba:frame_line_color
+                                        Line:
+                                            rectangle: [*self.pos, *self.size ]
+                                            width:frame_line_width
+            
+            BackgroundLabel:
+                color:text_color
+                id:label1
+                size_hint_y: 1
+                font_size:25
+                text_size: self.width, None
+                text:'ファイルを選択してください'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: '4dp'
+            size_hint_y: 0.15
+
+            WihteButton:
+                id:button2
+                text: 'ファイルを選択'
+                halign: 'center'
+                font_size:25
+                color:text_color
+                on_press:root.popup_open()
+                canvas.before:
+                    Color:
+                        rgba:frame_line_color
+                    Line:
+                        rectangle: [*self.pos, *self.size,]
+                        width:frame_line_width
+            
+            WihteButton:
+                id:button1
+                text: '名前を付けて保存'
+                halign: 'center'
+                font_size:25
+                color:text_color
+                on_press:root.popup_open2()
+                canvas.before:
+                    Color:
+                        rgba:frame_line_color
+                    Line:
+                        rectangle: [*self.pos, *self.size, ]
+                        width:frame_line_width
+
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<BackgroundLabel@Label+BackgroundColor>
+    background_color: 0, 0, 0, 0
+
+<BackgroundImage@Image+BackgroundColor>
+    background_color: 0, 0, 0, 0
+
+<WihteButton@Button>
+    background_color:(0,0,0,0)
+    background_normal:''
+    text_size: self.width, None
+    halign: 'center'
+    canvas.before:
+        Color:
+            rgba:background_color_down if self.state=='down' else (0.3,0.3,0.3,1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+<ToggleButtonbackground@ToggleButton>
+    background_color:(0,0,0,0)
+    background_normal:''
+    color:text_color 
+    canvas.before:
+        Color:
+            rgba:background_color_down if self.state=='down' else (1,1,1,1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<CustomDropDown@DropDown>:
+    Button:
+        text: 'My first Item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item1')
+    Label:
+        color:
+        text: 'Unselectable item'
+        size_hint_y: None
+        height: 44
+    Button:
+        text: 'My second Item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item2')
+
+<rrr>
+    
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: 0.3,0.3,0.3,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            
+        orientation:'vertical'
+        ScrollView:
+            size_hint_y:1
+            scroll_wheel_distance:70
+            BoxLayout:
+                size_hint_y:None
+                height: self.minimum_height
+                orientation:'vertical'
+                BoxLayout:
+                    size_hint_y:None
+                    orientation:'horizontal'
+                    height:100
+                    Label:
+                        color:text_color
+                        size_hint_x:0.8
+                        text:'アドバイス機能をオンにするか\n選んでください'
+                        font_size:'20'
+                    Image:
+                        size_hint_x:1
+                        source:'pic\\gui_0.png'
+                BoxLayout:
+                    size_hint_y:None
+                    orientation:'horizontal'
+                    height:500
+                    Label:
+                        color:text_color
+                        size_hint_x:0.8
+                        text:'自動修正をオンにするか\n選んでください'
+                        font_size:'20'
+                    Image:
+                        size_hint_x:1
+                        source:'pic\\gui_1.png'
+                BoxLayout:
+                    size_hint_y:None
+                    orientation:'horizontal'
+                    height:500
+                    Label:
+                        color:text_color
+                        size_hint_x:0.8
+                        text:'「ファイルを選択」を\nクリックしてください'
+                        font_size:'20'
+                    Image:
+                        size_hint_x:1
+                        source:'pic\\gui_2.png'
+                BoxLayout:
+                    size_hint_y:None
+                    orientation:'horizontal'
+                    height:500
+                    Label:
+                        color:text_color
+                        size_hint_x:0.8
+                        text:'修正したいパワーポイント\nのファイルをクリックすると\n白っぽくなるのでその状態で\n「選択」をクリックしてください'
+                        font_size:'20'
+                    Image:
+                        size_hint_x:1
+                        source:'pic\\gui_3.png'
+                        
+                BoxLayout:
+                    size_hint_y:None
+                    orientation:'horizontal'
+                    height:500
+                    Label:
+                        color:text_color
+                        size_hint_x:0.8
+                        text:'するとホーム画面に戻るので\n次は、保存を押してください'
+                        font_size:'20'
+                    Image:
+                        size_hint_x:1
+                        source:'pic\\gui_4.png'
+                BoxLayout:
+                    size_hint_y:None
+                    orientation:'horizontal'
+                    height:500
+                    Label:
+                        color:text_color
+                        size_hint_x:0.8
+                        text:'ファイルを保存したい\n場所に移動して\n名前を入力して\n保存を押してください\n\nこの時元の名前を押すと\n元の名前に_修正後を付けた名前になります'
+                        font_size:'15'
+                    Image:
+                        size_hint_x:1
+                        source:'pic\\gui_5.png'
+                BoxLayout:
+                    size_hint_y:None
+                    orientation:'horizontal'
+                    height:500
+                    Label:
+                        color:text_color
+                        size_hint_x:0.8
+                        text:'完了です。\n\nアドバイス機能をオンにしていると\n右にアドバイスが出るので\n参考にしてください'
+                        font_size:'15'
+                    Image:
+                        size_hint_x:1
+                        source:'pic\\gui_6.png'
+                        
+        Button:
+            size_hint_y:0.1
+            text:'戻る'
+            on_press:root.back()
+<Lock>
+    im:im
+    sc:sc
+    gr:gr
+    txin:txin
+    lbnum:lbnum
+    BoxLayout:
+        id:gr
+        orientation:'horizontal'
+
+        canvas.before:
+            Color:
+                rgba: 0.3, 0.3, 0.3, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            orientation:'vertical'
+            Label:
+                id:lbnum
+                text:''
+
+            TextInput:
+                id:txin
+                size_hint_y:0.2
+                text:''
+            Button:
+                text:'追加'
+                on_press:root.Lock_number()
+        BoxLayout:
+            orientation:'vertical'
+            
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size_hint:(1, 1)
+
+                BoxLayout:
+                    size_hint_y:3
+                    id:sc
+                    orientation:'horizontal'
+
+                    Image:
+                        size_hint_x:0.8
+                        id:im
+                        source:root.source
+            Button:
+                size_hint_y:0.1
+                text:'戻る'
+                on_press:root.back()
+
+
+        
+
+        
+<PopupMenu>
+    vv:fc
+    bt:bt
+    
+    BoxLayout:
+        orientation: 'vertical'
+        FileChooserListView:
+            size_hint_y:1
+            id:fc
+            filters: ['*.pptx']
+            color:1,0,0,1
+            
+        BoxLayout:
+            size_hint_y:0.1
+            orientation: 'horizontal'
+            Button:
+                id:bb
+                size_hint_x:0.3
+                text: '閉じる'
+                on_release:root.popup_close()
+            Button:
+                id:bt
+                size_hint_x:0.9
+                text: '選択'
+                on_release:root.filea()
+
+<PopupMenu2>
+    vv:fc
+    input:text_input
+    BoxLayout:
+        orientation: 'vertical'
+        FileChooserListView:
+            size_hint_y:1
+            id:fc
+        TextInput:
+            size_hint_y:0.15
+            id:text_input
+            multiline:False
+            text:''
+        BoxLayout:
+            size_hint_y:0.1
+            orientation: 'horizontal'
+            Button:
+                size_hint_x:0.3
+                text: '閉じる'
+                on_release:root.popup_close2()
+            Button:
+                size_hint_x:0.5
+                text: '元の名前をつける'
+                on_release:root.refilename()
+            Button:
+                size_hint_x:1
+                text: '保存'
+                on_release:root.fileb()
+
+<PopupMenue_setting>
+    sw1:switch1
+    sw2:switch2
+    sw3:switch3
+    sw4:switch4
+    sw5:switch5
+    sw6:switch6
+    sw8:switch8
+    sw9:switch9
+    sw10:switch10
+    dd1:dd1
+    dd2:dd2
+    lb:lb
+    lbl:lbl
+    tgb1:tgb1
+    tgb2:tgb2
+    tgb3:tgb3
+    tgb4:tgb4
+    gr:gr
+    cir:cir
+    wave:wave
+    ex:ex
+    scr:scr
+    arr:arr
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 0.1,0.1,0.1,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:.4
+                text:'フォント'
+                font_size:'20'
+            Switch:
+                active:True
+                id:switch1
+                on_touch_down: print('') if self.active==True else root.dd1.open(lb)
+            Label:
+                id:lb
+                text:'メイリオ'
+                color:text_color
+            DropDown:
+                id:dd1
+                size:0,0
+                ToggleButtonbackground:
+                    canvas:
+                        Color:
+                            rgba:frame_line_color
+                        Line:
+                            rectangle: [*self.pos, *self.size,]
+                            width:frame_line_width
+                    id:tgb1
+                    group:'font'
+                    text:'メイリオ'
+                    size_hint_y: None
+                    height: 44
+                    on_press:root.lb.text='メイリオ'
+                ToggleButtonbackground:
+                    canvas:
+                        Color:
+                            rgba:frame_line_color
+                        Line:
+                            rectangle: [*self.pos, *self.size,]
+                            width:frame_line_width
+                    id:tgb2
+                    group:'font'
+                    text:'游ゴシック'
+                    size_hint_y: None
+                    height: 44
+                    on_press:root.lb.text='游ゴシック'
+
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:0.4
+                text:'画面切り替え'
+                font_size:'20'
+            Switch:
+                active:True
+                id:switch2
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:0.4
+                text:'下線'
+                font_size:'20'
+            Switch:
+                active:True
+                id:switch3
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:0.4
+                text:'イタリック'
+                font_size:'20'
+            Switch:
+                active:True
+                id:switch4
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:0.4
+                text:'左揃え'
+                font_size:'20'
+            Switch:
+                active:True
+                id:switch5
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:0.4
+                text:'枠線処理'
+                font_size:'20'
+            Switch:
+                active:True
+                id:switch6
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:0.4
+                text:'図形'
+                font_size:'20'
+            GridLayout:
+                spacing:'2dp'
+                id:gr
+                rows:1
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    ToggleButtonbackground:
+                        id:cir
+                        size_hint: .9,.93
+                        state:'down'
+                        Image:
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            source:'pic\\circle.png'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    ToggleButtonbackground:
+                        id:ex
+                        size_hint: .9,.93
+                        state:'down'
+                        Image:
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            source:'pic\\explotion.png'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    ToggleButtonbackground:
+                        id:scr
+                        size_hint: .9,.93
+                        state:'down'
+                        Image:
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            source:'pic\\scroll.png'
+                            
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    ToggleButtonbackground:
+                        id:arr
+                        size_hint: .9,.93
+                        state:'down'
+                        Image:
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            source:'pic\\arrow.png'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    ToggleButtonbackground:
+                        id:wave
+                        size_hint: .9,.93
+                        state:'down'
+                        Image:
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            source:'pic\\wave.png'
+                            
+
+
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:0.4
+                text:'表'
+                font_size:'20'
+            Switch:
+                active:True
+                id:switch8
+                on_touch_down: print('') if self.active==True else root.dd2.open(lbl)
+            Label:
+                id:lbl
+                color:text_color
+                size_hint_x:0.4
+                text:'カラー'
+                font_size:'20'
+            DropDown:
+                id:dd2
+                size:0,0
+                ToggleButtonbackground:
+                    canvas:
+                        Color:
+                            rgba:frame_line_color
+                        Line:
+                            rectangle: [*self.pos, *self.size,]
+                            width:frame_line_width
+                    id:tgb3
+                    group:'tabel'
+                    text:'カラー'
+                    size_hint_y: None
+                    height: 44
+                    on_press:root.lbl.text='カラー'
+                ToggleButtonbackground:
+                    canvas:
+                        Color:
+                            rgba:frame_line_color
+                        Line:
+                            rectangle: [*self.pos, *self.size,]
+                            width:frame_line_width
+                    id:tgb4
+                    group:'tabel'
+                    text:'白黒'
+                    size_hint_y: None
+                    height: 44
+                    on_press:root.lbl.text='白黒'
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:0.4
+                text:'図の効果'
+                font_size:'20'
+            Switch:
+                active:True
+                id:switch9
+        BoxLayout:
+            size_hint_y:0.25
+            orientation:'horizontal'
+            canvas:
+                Color:
+                    rgba:frame_line_color
+                Line:
+                    rectangle: [*self.pos, *self.size,]
+                    width:frame_line_width
+            Label:
+                color:text_color
+                size_hint_x:0.4
+                text:'ロック機能'
+                font_size:'20'
+            Switch:
+                active:False
+                id:switch10
+        BoxLayout:
+            size_hint_y:0.2
+            orientation:'horizontal'
+            BoxLayout:
+                size_hint_x:0.9
+                orientation:'horizontal'
+            Button:
+                text:'OK'
+                on_press:root.setting()
+        
+
+<CustomDropDown@DropDown>:
+    id:dd1
+    Button:
+        text: 'My first Item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item1')
+    Label:
+        color:
+        text: 'Unselectable item'
+        size_hint_y: None
+        height: 44
+    Button:
+        text: 'My second Item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item2')
+<education>
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: 0.3, 0.3, 0.3, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text:"hellow"
+        Button:
+            on_press:root.back()
+<ImageToggle@Image+ToggleButton>:
+    source:'pic\\explotion.png'
+    size:10,10
+    allow_stretch:True
+<ImageToggle@ToggleButton>
+    background_color:(0,0,0,0)
+    background_normal:''
+    color:text_color 
+    canvas.before:
+        Color:
+            rgba:background_color_down if self.state=='down' else (1,1,1,1)
+        Image:
+            size: self.size
+            pos: self.pos
+            source:'pic\\explotion.png'
